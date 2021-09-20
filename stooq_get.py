@@ -7,11 +7,15 @@ def get_price(code):
     return df
 
 
-symbole = input('Please enter a symbol.\n')
-df = get_price(symbole)
-download = os.environ["USERPROFILE"] + r'\Downloads'
-file = download + '\\' + symbole + '.CSV'
-print(file)
-df.to_csv(file)
+print('Start acquiring stooq data.')
+symbols = ['ES.F', 'NQ.F', 'ZB.F', 'UL.F']
 
-input('Completed')
+for symbol in symbols:
+    print('Request ' + symbol + ' data.')
+    df = get_price(symbol)
+    print('Get ' + symbol + ' data.\n')
+    download = os.environ["USERPROFILE"] + r'\Downloads'
+    file = download + '\\' + symbol + '.CSV'
+    df.to_csv(file)
+
+input('Completed.')
