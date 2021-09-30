@@ -14,7 +14,7 @@ def get_csv(code):
     df.to_csv(filePath)
 
 
-processingMethod = input('Select a processing number .\n'
+processingMethod = input('Select a processing number.\n'
                          '1: ES, NQ, ZB, UB(UD).\n'
                          '2: Manual input.\n')
 
