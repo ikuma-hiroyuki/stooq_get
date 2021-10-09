@@ -5,12 +5,18 @@ import pandas as pd
 from pandas.errors import EmptyDataError
 
 
-def get_csv(code):
-    print('Request ' + symbol + ' data.')
+def get_csv(code: str):
+    print(f'Request {symbol} data.')
     df = pd.read_csv(f'https://stooq.com/q/d/l/?s={code}&i=d', index_col=0)
-    print('Get ' + symbol + ' data.\n')
-    download = os.environ["USERPROFILE"] + r'\Downloads'
-    filePath = download + '\\' + symbol.replace('.F', '') + '.csv'
+    print(f'Get {symbol} data.\n')
+    fileName = symbol.replace('.F', '') + '.csv'
+    if os.name == 'nt':
+        download = f'{os.environ["USERPROFILE"]}\\Downloads'
+        filePath = f'{download}\\{fileName}'
+    else:
+        download = f"{os.getenv('HOME')}/Downloads"
+        filePath = f'{download}/{fileName}'
+
     df.to_csv(filePath)
 
 
